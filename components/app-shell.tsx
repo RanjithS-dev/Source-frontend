@@ -4,10 +4,11 @@ import { useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
 
 import { BrandLogo } from "./brand-logo";
+import { ThemeToggle } from "./theme-toggle";
 import { UiIcon, type IconName } from "./ui-icon";
 import { getStoredSession } from "../lib/session";
 
-type AppShellSection = "dashboard" | "lands" | "employees" | "vehicles" | "worklogs" | "sales" | "attendance";
+type AppShellSection = "dashboard" | "lands" | "employees" | "vehicles" | "worklogs" | "sales" | "attendance" | "stores" | "grns";
 
 type AppShellProps = {
   active: AppShellSection;
@@ -33,7 +34,9 @@ const primaryNav: NavItem[] = [
   { key: "employees", label: "Employees", href: "/employees", icon: "employee" },
   { key: "vehicles", label: "Vehicles", href: "/vehicles", icon: "vehicle" },
   { key: "worklogs", label: "Work Logs", href: "/worklogs", icon: "workflow" },
-  { key: "sales", label: "Sales", href: "/sales", icon: "sales" }
+  { key: "sales", label: "Sales", href: "/sales", icon: "sales" },
+  { key: "stores", label: "Stores/Hubs", href: "/stores", icon: "dashboard" },
+  { key: "grns", label: "Receipts (GRN)", href: "/grns", icon: "workflow" }
 ];
 
 const secondaryModules: Array<{ label: string; icon: IconName }> = [
@@ -107,6 +110,7 @@ export function AppShell({
             <UiIcon height={16} name="logout" width={16} />
             <span>Log out</span>
           </button>
+
         </div>
       </aside>
 
@@ -128,6 +132,7 @@ export function AppShell({
           </div>
 
           <div className="topbar-tools">
+            <ThemeToggle />
             <div className="topbar-date">{todayLabel}</div>
             <button className="icon-button" type="button" aria-label="Notifications">
               <UiIcon height={18} name="bell" width={18} />
@@ -158,6 +163,15 @@ export function AppShell({
         </section>
 
         {children}
+
+        <footer className="workspace-footer">
+          <p>
+            This Software is Developed and Managed by{" "}
+            <a href="https://github.com/Pavithran26" target="_blank" rel="noopener noreferrer">
+              Pavithran S
+            </a>
+          </p>
+        </footer>
       </section>
     </main>
   );
